@@ -9,10 +9,11 @@
     align-items: center;
 
     background-color: var(--header-bg);
-    background-image: url(https://catherineasquithgallery.com/uploads/posts/2021-02/1614254364_84-p-oboi-na-stenu-chernii-fon-101.jpg);
+    background-image: url(http://yadkiinfotech.com/wp-content/uploads/2021/06/slider-bg-2.jpg);
     background-repeat: no-repeat;
-    background-size: auto;
-    background-position: center center;
+    /*background-position: 178px -300px;*/
+    background-size: cover;
+    background-position: bottom right;
 
     color: var(--header-text);
     text-align: center;

@@ -21,6 +21,7 @@ const Footer = () => {
                         <li className="social__item"><a href="#!"><img src={linkedIn} alt="Link"/></a>
                         </li>
                     </ul>
+                    
                     <div className="copyright">
                         <p>© Copyright 2023 Jobs-Tops</p>
                     </div>

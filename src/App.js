@@ -4,6 +4,7 @@ import ScrollToTop from "./utils/scrollToTop";
 import Footer from "./components/footer/Footer";
 import Home from "./pages/Home";
 import './styles/main.css'
+import FormValidation from "./components/formValidation/FormValidation";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
                 {/*<Route path="/projects" element={<Projects />}/>*/}
                 {/*<Route path="/project/:id" element={<Project/>}/>*/}
                 {/*<Route path="/contacts" element={<Contacts />}/>*/}
+                <Route path="/login" element={<FormValidation/>}/>
             </Routes>
             <Footer />
         </Router>

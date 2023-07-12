@@ -4,7 +4,8 @@ import './style.css'
 const Header = () => {
     const [query, setQuery] = useState("")
     const handleSearch = e => {  e.preventDefault()
-        setQuery(e.target.value) }
+        setQuery(e.target.value)
+    }
     // const filteredJobs = jobs.filter(job => job.title.toLowerCase().includes(query.toLowerCase()))
     return (
         <div className="header">
@@ -19,7 +20,6 @@ const Header = () => {
                            value={query}
                            onChange={e => setQuery(e.target.value)}
                            placeholder="Search for jobs"
-
                     />
                     <button className="search-button" type="submit">Search</button>
                 </form>
