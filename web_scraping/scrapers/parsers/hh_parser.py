@@ -18,3 +18,21 @@ class hh_parser:
             - 1
         )
         return page_count
+
+    def get_href_of_job_cards(self, html: str) -> list[str]:
+        soup: bs = bs(html, "html.parser")
+        return list(
+            map(
+                lambda a: a.attrs["href"].split("?")[0],
+                soup.find(
+                    "div",
+                    attrs={
+                        "data-qa": "vacancy-serp__results",
+                        "id": "a11y-main-content",
+                    },
+                ).find_all(
+                    "a",
+                    attrs={"class": "serp-item__title", "data-qa": "serp-item__title"},
+                ),
+            )
+        )
