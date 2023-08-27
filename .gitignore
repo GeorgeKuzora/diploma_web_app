@@ -162,3 +162,6 @@ cython_debug/
 #
 # MySQL configuration file
 my.cnf
+# pyrightconfig file
+pyrightconfig.json
+tests/mock_pages/*_files/
