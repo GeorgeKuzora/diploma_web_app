@@ -36,3 +36,11 @@ class hh_parser:
                 ),
             )
         )
+
+    def get_job_card_data(self, html: str) -> dict:
+        skills = []
+        soup: bs = bs(html, "html.parser")
+        skills_div = soup.find("div", attrs={"class": "bloko-tag-list"})
+        for skill in skills_div.children:
+            skills.append(str(skill.span.string))
+        return {"skills": skills}
