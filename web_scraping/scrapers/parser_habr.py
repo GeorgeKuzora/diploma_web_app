@@ -23,7 +23,7 @@ def make_response(current_url: str) -> requests.models.Response:
     ua = get_useragent()
     response = requests.get(
         url=current_url,
-        headers={"user-agent":ua.random}
+        headers={"user-agent": ua.random}
     )
     return response
 
