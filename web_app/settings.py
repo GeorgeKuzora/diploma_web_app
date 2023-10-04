@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
-from config import config_load
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -73,15 +72,12 @@ WSGI_APPLICATION = "web_app.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-mysql_conf = config_load()
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'HOST': mysql_conf['HOST'],
-        'PORT': mysql_conf['PORT'],
-        'DATABASE': mysql_conf['DATABASE'],
-        'USER': mysql_conf['USER'],
-        'PASSWORD': mysql_conf['PASSWORD'],
+    "default": {
+        "ENGINE": "django.db.backends.mysql",
+        "OPTIONS": {
+            "read_default_file": "my.cnf",
+        },
     }
 }
 

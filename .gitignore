@@ -160,7 +160,7 @@ cython_debug/
 #.idea/
 #
 #
-# MySQL configuration file
+# MySQL configuration files
 my.cnf
 .env.mysql
 # pyrightconfig file
