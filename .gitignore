@@ -166,4 +166,5 @@ my.cnf
 # pyrightconfig file
 pyrightconfig.json
 tests/mock_pages/*_files/
-
+*.drawio
+*.bkp
