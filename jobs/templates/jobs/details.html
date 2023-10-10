@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Job details</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="css/style.css" rel="stylesheet">
+    </head>
+    <body>
+        {% if job_details %}
+            <h2>{{ job_details.job_name }}</h2>
+            <div><span>{{ job_details.job_description }}</span></div>
+        {% else %}
+            <div><span>Job does not exist!</span></div>
+        {% endif %}
+
+    </body>
+</html>
