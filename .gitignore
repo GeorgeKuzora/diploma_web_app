@@ -160,10 +160,11 @@ cython_debug/
 #.idea/
 #
 #
-# MySQL configuration file
+# MySQL configuration files
 my.cnf
 .env.mysql
 # pyrightconfig file
 pyrightconfig.json
 tests/mock_pages/*_files/
-
+*.drawio
+*.bkp

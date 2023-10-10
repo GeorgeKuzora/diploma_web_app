@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Skill details</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="css/style.css" rel="stylesheet">
+    </head>
+    <body>
+        {% if skill_details %}
+            <h2>{{ skill_details.skill_name }}</h2>
+        {% else %}
+            <div><span>Skill does not exist!</span></div>
+        {% endif %}
+    </body>
+</html>
