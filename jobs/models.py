@@ -27,8 +27,8 @@ class Job(models.Model):
         "Address", on_delete=models.SET_NULL, verbose_name="address"
     )
     is_archived = models.BooleanField("is archived", default=False)
-    required_experience = models.IntegerField(
-        blank=True, choices=Experience.choices
+    required_experience = models.CharField(
+        "required experience", max_length=11, blank=True, choices=Experience.choices
     )
 
     class META:
