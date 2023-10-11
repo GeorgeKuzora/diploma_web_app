@@ -9,3 +9,11 @@ class Company(models.Model):
     address = models.ForeignKey(
         "Address", on_delete=models.SET_NULL, verbose_name="address"
     )
+
+    class META:
+        ordering = ["title"]
+        verbose_name = "company"
+        verbose_name_plural = "companies"
+
+    def __str__(self):
+        return self.title
