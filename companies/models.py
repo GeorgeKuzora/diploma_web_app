@@ -17,3 +17,25 @@ class Company(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Address(models.Model):
+    class CountryChoices(models.TextChoices):
+        RUSSIA = "RUS"
+        KAZAKHSTAN = "KAZ"
+        BELARUS = "BEL"
+
+    country = models.CharField("country", max_length=50, choices=CountryChoices.choices)
+    region = models.CharField("region", max_length=50)
+    city = models.CharField("city", max_length=50)
+    street = models.CharField("street", max_length=50)
+    building = models.CharField("building", max_length=6)
+    room = models.CharField("room", max_length=5)
+
+    class META:
+        ordering = ["city"]
+        verbose_name = "address"
+        verbose_name_plural = "addresses"
+
+    def __str__(self):
+        return f"{self.country}, {self.region}, {self.city}, {self.street}, {self.building}, {self.room}"
