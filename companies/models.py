@@ -7,7 +7,7 @@ class Company(models.Model):
     email = models.EmailField("company email")
     phone = models.CharField("company phone", max_length=12)
     address = models.ForeignKey(
-        "Address", on_delete=models.SET_NULL, verbose_name="address"
+        "Address", on_delete=models.SET_NULL, verbose_name="address", null=True
     )
 
     class META:

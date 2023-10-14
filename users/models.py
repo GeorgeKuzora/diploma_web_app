@@ -1,4 +1,5 @@
 from datetime import date
+from django.utils.timezone import now
 from django.db import models
 from skills.models import Skill
 
@@ -10,7 +11,7 @@ class User:
     birthdate = models.DateField()
     email = models.EmailField("user email")
     password = models.CharField("user password")
-    registration_date = models.DateField(default=date.today())
+    registration_date = models.DateField(default=now())
     skills = models.ManyToManyField(Skill)
     phone = models.CharField("company phone", max_length=12)
     address = models.ForeignKey(
