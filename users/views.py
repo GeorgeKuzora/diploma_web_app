@@ -1,3 +1,8 @@
 from django.shortcuts import render
+from .forms import UserAuthForm
 
-# Create your views here.
+
+def login_view(request):
+    auth_form = UserAuthForm()
+    context = {"form": auth_form}
+    return render(request, "users/login.html", context=context)
