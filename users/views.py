@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from django.contrib.auth.views import LogoutView
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login
@@ -57,3 +58,7 @@ class UserRegisterView(View):
         else:
             form.add_error("__all__", "Failed to create a new user!")
             return render(request, "users/register.html", {"form": form})
+
+
+class UserLogoutView(LogoutView):
+    next_page = '/jobs/search/'
