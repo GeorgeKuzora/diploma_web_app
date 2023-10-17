@@ -2,12 +2,10 @@ from django import forms
 
 
 class UserAuthForm(forms.Form):
-    user_email = forms.EmailField(
-        widget=forms.EmailInput,
-        initial="example@email.com",
-        help_text="Enter your email",
+    username = forms.CharField(
+        help_text="Enter your username",
     )
-    user_password = forms.CharField(
+    password = forms.CharField(
         widget=forms.PasswordInput,
         initial="*****",
         help_text="Enter your password"
