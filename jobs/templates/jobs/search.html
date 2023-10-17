@@ -7,6 +7,10 @@
         <link href="css/style.css" rel="stylesheet">
     </head>
     <body>
+        <form action="{% url 'users:logout' %}">
+            <input type="submit" value="Logout"/>
+        </form>
+        <h2>Поиск вакансий</h2>
         <form action="{% url 'jobs:search' %}" method="post">
         {% csrf_token %}
         {{ job_form.as_p }}
