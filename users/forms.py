@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib.auth.forms import BaseUserCreationForm
 
 
 class UserAuthForm(forms.Form):
@@ -10,3 +11,7 @@ class UserAuthForm(forms.Form):
         initial="*****",
         help_text="Enter your password"
     )
+
+
+class UserRegisterForm(BaseUserCreationForm):
+    email = forms.EmailField(help_text="Enter your email")
