@@ -1,26 +1,27 @@
 from datetime import date
+from django.contrib.auth.models import User
+from django.utils.timezone import now
 from django.db import models
+from companies.models import Address
 from skills.models import Skill
 
 
-class User:
-    name = models.CharField("user name", max_length=20)
-    lastname = models.CharField("user lastname", max_length=30)
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     parentname = models.CharField("user parent name", max_length=20)
     birthdate = models.DateField()
-    email = models.EmailField("user email")
-    password = models.CharField("user password")
-    registration_date = models.DateField(default=date.today())
     skills = models.ManyToManyField(Skill)
-    phone = models.CharField("company phone", max_length=12)
+    phone = models.CharField("user phone", max_length=12)
     address = models.ForeignKey(
-        "Address", on_delete=models.SET_NULL, verbose_name="address"
+        Address,
+        on_delete=models.SET_NULL,
+        null=True,
+        verbose_name="user address"
     )
 
     class META:
-        ordering = ["lastname", "name", "parentname"]
-        verbose_name = "user"
-        verbose_name_plural = "users"
+        verbose_name = "profile"
+        verbose_name_plural = "profiles"
 
     def __str__(self):
-        return f"{self.lastname} {self.name} {self.parentname}"
+        return f"{self.user}"

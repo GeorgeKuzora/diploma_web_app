@@ -1,6 +1,8 @@
 from django.core.validators import MinValueValidator
+from django.utils.timezone import now
 from django.db import models
 from skills.models import Skill
+from companies.models import Company, Address
 from datetime import date
 
 
@@ -16,15 +18,17 @@ class Job(models.Model):
     job_description = models.TextField(verbose_name="job description")
     skills = models.ManyToManyField(Skill)
     min_salary = models.IntegerField(
-        "minimum salary", validators=[MinValueValidator(limit_value=0)]
+        "minimum salary",
+        validators=[MinValueValidator(limit_value=0)],
+        null=True
     )
-    max_salary = models.IntegerField("maximum salary")
+    max_salary = models.IntegerField("maximum salary", null=True)
     company = models.ForeignKey(
-        "Company", on_delete=models.SET_NULL, verbose_name="company"
+        Company, on_delete=models.SET_NULL, verbose_name="company", null=True
     )
-    pub_date = models.DateField(default=date.today())
+    pub_date = models.DateField(default=now())
     address = models.ForeignKey(
-        "Address", on_delete=models.SET_NULL, verbose_name="address"
+        Address, on_delete=models.SET_NULL, verbose_name="address", null=True
     )
     is_archived = models.BooleanField("is archived", default=False)
     required_experience = models.CharField(
