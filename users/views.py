@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.contrib.auth import authenticate, login
 from django.views import View
 from django.urls import reverse
-from .forms import UserAuthForm, UserRegisterForm
+from .forms import UserAuthForm, UserRegisterForm, UserSettingsForm
 
 
 class UserLoginView(View):
@@ -62,3 +62,32 @@ class UserRegisterView(View):
 
 class UserLogoutView(LogoutView):
     next_page = '/jobs/search/'
+
+
+class UserSettingsView(View):
+    def get(self, request, settings_form=None):
+        if not settings_form:
+            settings_form = UserSettingsForm()
+        context = {"form": settings_form}
+        return render(request, "users/settings.html", context=context)
+
+    def post(self, request):
+        form = UserSettingsForm(request.POST)
+        user: User = request.user
+        if form.is_valid():
+            username = form.cleaned_data.get("username")
+            firstname = form.cleaned_data.get("firstname")
+            lastname = form.cleaned_data.get("lastname")
+            parent_name = form.cleaned_data.get("parent_name")
+            email = form.cleaned_data.get("email")
+            birthdate = form.cleaned_data.get("birthdate")
+            skills = form.cleaned_data.get("skills")
+            phone = form.cleaned_data.get("phone")
+            address = form.cleaned_data.get("address")
+            if email:
+                user.email = email
+            user.save()
+            return HttpResponseRedirect(reverse("users:settings"))
+        else:
+            form.add_error("__all__", "Failed to update user's data!")
+            return render(request, "users/settings.html", {"form": form})
