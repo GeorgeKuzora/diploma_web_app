@@ -1,0 +1,52 @@
+# Use only for development
+version: '3.9'
+
+services:
+  db:
+    build:
+      context: .
+      dockerfile: ./docker/mysql/Dockerfile
+    container_name: db
+    restart: unless-stopped
+    env_file: .env
+    volumes:
+      - hh-app-data:/var/lib/mysql
+    networks:
+      - hh-app-network
+    expose:
+      - 3306
+
+  app:
+    build:
+        context: .
+        dockerfile: ./docker/django/Dockerfile
+    container_name: app
+    restart: unless-stopped
+    env_file: .env
+    # command: python manage.py runserver 0.0.0.0:8000
+    ports:
+      - 127.0.0.1:6080:8000
+    depends_on:
+      - db
+    networks:
+      - hh-app-network
+    expose:
+      - 8000
+
+  adminer:
+    image: adminer:4.8.1
+    depends_on:
+    - db
+    restart: always
+    ports:
+      - 127.0.0.1:6081:8080
+    networks:
+      - hh-app-network
+    expose:
+      - 8080
+volumes:
+  hh-app-data:
+networks:
+  hh-app-network:
+    driver: bridge
+

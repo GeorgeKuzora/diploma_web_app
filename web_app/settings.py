@@ -10,7 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
+import os
 from pathlib import Path
+from dotenv import dotenv_values
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -74,14 +76,17 @@ TEMPLATES = [
 WSGI_APPLICATION = "web_app.wsgi.application"
 
 
+config = dotenv_values(".env")
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
-        "OPTIONS": {
-            "read_default_file": "web_app/my.cnf",
-        },
+        'NAME': os.environ.get('MYSQL_DATABASE', config['MYSQL_DATABASE']),
+        'USER': os.environ.get('MYSQL_USER', config['MYSQL_USER']),
+        'PASSWORD': os.environ.get('MYSQL_PASSWORD', config['MYSQL_PASSWORD']),
+        'HOST': os.environ.get('MYSQL_DATABASE_HOST', ''),
+        'PORT': os.environ.get('MYSQL_DATABASE_PORT', ''),
     }
 }
 
