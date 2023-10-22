@@ -1,0 +1,30 @@
+[tool.poetry]
+name = "diploma-web-app"
+version = "0.1.0"
+description = "Job Hunting web site project"
+authors = ["GeorgiyKuzora <rafale87@gmail.com>"]
+readme = "README.md"
+packages = [{include = "web_app"}]
+
+[tool.poetry.dependencies]
+python = "3.11.6"
+Django = "4.2.3"
+mysqlclient = "2.2.0"
+python-dotenv = "1.0.0"
+
+[tool.poetry.group.dev.dependencies]
+django-stubs = "4.2.4"
+django-stubs-ext = "4.2.2"
+
+[tool.pyright]
+include = []
+exclude = [".pytest_cache",
+    "**/__pycache__",
+]
+venvPath = "."
+venv = ".venv"
+pythonVersion = "3.11.6"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
