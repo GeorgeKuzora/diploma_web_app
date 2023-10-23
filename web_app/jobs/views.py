@@ -10,7 +10,7 @@ from .forms import JobForm
 from django.views import View
 
 
-def index(request) -> HttpResponse:
+def get_job_list_from_user_skills(request) -> dict:
     user: User = request.user
     job_list: QuerySet[Job] | None = None
     if user.is_anonymous or not user.is_active:
@@ -25,7 +25,11 @@ def index(request) -> HttpResponse:
     if not job_list:
         job_list = Job.objects.all()
 
-    context = {"job_list": job_list, }
+    return {"job_list": job_list, }
+
+
+def index(request) -> HttpResponse:
+    context = get_job_list_from_user_skills(request)
     return render(request, "jobs/index.html", context)
 
 
@@ -38,11 +42,11 @@ def job_detail(request, job_id):
 class JobSearch(View):
 
     def get(self, request, skill_name=""):
-        job_list = Job.objects.order_by("job_name")
+        context = get_job_list_from_user_skills(request)
         job_form = JobForm()
         if skill_name:
-            job_list = Job.objects.filter(skills__skill_name=skill_name)
-        context = {"job_list": job_list, "job_form": job_form}
+            context["job_list"] = Job.objects.filter(skills__skill_name=skill_name)
+        context["job_form"] = job_form
         return render(request, "jobs/search.html", context)
 
     def post(self, request):
