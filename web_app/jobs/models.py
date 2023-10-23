@@ -1,13 +1,12 @@
 from django.core.validators import MinValueValidator
-from django.utils.timezone import now
 from django.db import models
 from skills.models import Skill
 from companies.models import Company, Address
-from datetime import date
 
 
 class Job(models.Model):
     class Experience(models.TextChoices):
+        NOT_SPECIFIED = ""
         WITHOUT = "WITHOUT"
         UPTO3YEARS = "1-3YEARS"
         UPTO6YEARS = "3-6YEARS"
