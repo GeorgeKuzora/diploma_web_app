@@ -29,9 +29,7 @@ class Migration(migrations.Migration):
             name="skill_name",
             field=models.CharField(
                 max_length=50,
-                primary_key=True,
                 serialize=False,
-                unique=True,
                 verbose_name="skill title",
             ),
         ),
