@@ -26,7 +26,7 @@ class Job(models.Model):
     company = models.ForeignKey(
         Company, on_delete=models.SET_NULL, verbose_name="company", null=True
     )
-    pub_date = models.DateField(default=now())
+    pub_date = models.DateField(null=True)
     address = models.ForeignKey(
         Address, on_delete=models.SET_NULL, verbose_name="address", null=True
     )
