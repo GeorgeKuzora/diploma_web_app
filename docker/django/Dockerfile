@@ -10,6 +10,6 @@ RUN pip install --upgrade pip \
     && rm requirements.txt \
     && chmod +x /app/init_app.sh
 
-COPY . /app
+COPY ./web_app /app/web_app
 
 ENTRYPOINT ["/bin/bash", "/app/init_app.sh"]

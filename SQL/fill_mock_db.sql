@@ -1,7 +1,5 @@
 USE diploma_web_app;
 
-START TRANSACTION;
-
 INSERT INTO skills_skill (skill_name, skill_description)
 VALUES 
 	("golang", "golang language"),
@@ -11,7 +9,7 @@ VALUES
     ("html", "html markup language"),
     ("spring", "spring framework");
 COMMIT;
-START TRANSACTION;
+
 INSERT INTO companies_address (country, region, city, street, building, room)
 VALUES
 	("RUS", "saint-petersburg", "saint-petersburg", "nevskiy", "1", "1"),
@@ -19,7 +17,6 @@ VALUES
 	("KAZ", "astaninskaya", "astana", "nursultan", "99", "222");
 COMMIT;
 
-START TRANSACTION;
 INSERT INTO companies_company (id, title, description, email, phone, address_id)
 VALUES
 	(1, "yandex", "yandex software company", "yandex@yandex.ru", "+79313332211", 1),
@@ -27,7 +24,6 @@ VALUES
 	(3, "kazhah soft", "software company in kazahstan", "kaz@kaz.kz", "+16323432200", 3);
 COMMIT;
 
-START TRANSACTION;
 INSERT INTO jobs_job 
 	(job_name, job_description, address_id, company_id, is_archived, max_salary, min_salary, pub_date, required_experience)
 VALUES
@@ -35,7 +31,7 @@ VALUES
 	("golang developer", "job in belarus", 2, 2, 0, 300000, 200000, "2023-08-30", "3-6YEARS"),
 	("java developer", "job in kazahstan", 3, 3, 0, 60000, 50000, CURDATE(), "WITHOUT");
 COMMIT;
-START TRANSACTION;
+
 INSERT INTO jobs_job_skills
 	(job_id, skill_id)
 VALUES
