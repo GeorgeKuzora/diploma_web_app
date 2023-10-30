@@ -7,34 +7,29 @@ Examples:
     # import it in a test module
     from .fixtures import <function_name>
 """
-from companies.models import Address, Company
+from companies.models import Address
 
 
-DEFAULT_TEST_COUNTRY: str = "RUS"
-DEFAULT_TEST_REGION: str = "moscow"
-DEFAULT_TEST_CITY: str = "moscow"
-DEFAULT_TEST_STREET: str = "tverskaya"
-DEFAULT_TEST_BUILDING: str = "1"
-DEFAULT_TEST_ROOM: str = "1"
-
-DEFAULT_TEST_ADDRESS: tuple = (
-    DEFAULT_TEST_COUNTRY,
-    DEFAULT_TEST_REGION,
-    DEFAULT_TEST_CITY,
-    DEFAULT_TEST_STREET,
-    DEFAULT_TEST_BUILDING,
-    DEFAULT_TEST_ROOM,
-)
+DEFAULT_TEST_ADDRESS: dict[str, str | int] = {
+    "id": 1,
+    "country":  "RUS",
+    "region":  "moscow",
+    "city":  "moscow",
+    "street":  "tverskaya",
+    "building":  "1",
+    "room":  "1",
+}
 
 
 def add_address_object(
-    country: str = DEFAULT_TEST_COUNTRY,
-    region: str = DEFAULT_TEST_REGION,
-    city: str = DEFAULT_TEST_CITY,
-    street: str = DEFAULT_TEST_STREET,
-    building: str = DEFAULT_TEST_BUILDING,
-    room: str = DEFAULT_TEST_ROOM,
-) -> None:
+    id: str | int = DEFAULT_TEST_ADDRESS["id"],
+    country: str | int = DEFAULT_TEST_ADDRESS["country"],
+    region: str | int = DEFAULT_TEST_ADDRESS["region"],
+    city: str | int = DEFAULT_TEST_ADDRESS["city"],
+    street: str | int = DEFAULT_TEST_ADDRESS["street"],
+    building: str | int = DEFAULT_TEST_ADDRESS["building"],
+    room: str | int = DEFAULT_TEST_ADDRESS["room"],
+) -> Address:
     """
     Creates and saves address object.
 
@@ -42,6 +37,8 @@ def add_address_object(
     Default arguments is always the same.
 
     Args:
+        id: Address id.
+            Default value: 1
         country: Address country.
             Default value: 'RUS'
         region: Address region.
@@ -60,6 +57,7 @@ def add_address_object(
         add_address_object(<args>)
     """
     address: Address = Address(
+        id=id,
         country=country,
         region=region,
         city=city,
@@ -68,3 +66,4 @@ def add_address_object(
         room=room,
     )
     address.save()
+    return Address.objects.get(id=id)
