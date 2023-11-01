@@ -12,22 +12,17 @@ from django.views import View
 
 def get_job_list_from_user_skills(request) -> dict:
     user: User = request.user
-    job_list: QuerySet[Job] | None = None
-    if user.is_anonymous or not user.is_active:
-        job_list = Job.objects.all()
-    elif user.is_authenticated and user.is_active and user:
+    job_list: QuerySet[Job] = Job.objects.all()
+    if user and user.is_authenticated and user.is_active:
         try:
             profile: Profile = Profile.objects.get(user=user)
-            skills = Skill.objects.filter(profile=profile)
+            skills: QuerySet[Skill] | None = Skill.objects.filter(
+                profile=profile
+            )
         except Profile.DoesNotExist as e:
-            skills = []
-        if len(skills) > 0:
+            skills = None
+        if skills and len(skills) > 0:
             job_list = Job.objects.filter(skills__in=skills).distinct()
-        else:
-            job_list = Job.objects.all()
-    if not job_list:
-        job_list = Job.objects.all()
-
     return {"job_list": job_list}
 
 
